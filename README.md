@@ -1,6 +1,6 @@
-# (UAI 2022) Sup-tickets
+# (UAI2022) Sup-tickets
 
-<img src="https://github.com/luuyin/Sup-tickets/blob/main/sup_tickets.png" width="600" height="300">
+<div align=center><img src="https://github.com/luuyin/Sup-tickets/blob/main/sup_tickets.png" width="600" height="300"></div>
 
 
 **Superposing Many Tickets into One: A Performance Booster for Sparse Neural Network Training**<br>
@@ -25,7 +25,6 @@ The library requires Python 3.7, PyTorch v1.10.0, and CUDA v11.3.1. Other versio
 ###  Options 
 
 ```
-
 Options for sparse training
 * --sparse - Enable sparse mode (remove this if want to train dense model)
 * --method - type of sparse training method. Choose from: GraNet, GraNet_uniform, DST, GMP, GMP_uniform
@@ -54,40 +53,37 @@ Options for creating and superposing cheap tickets
 ```
 
 ### CIFAR-10/100 Experiments
-
-### Superpose cheap tickets created by GraNet (s_i = 5) at sparsity 0.95:
+```
 cd CIFAR
+```
 
+#### Superpose cheap tickets created by GraNet (s_i = 5) at sparsity 0.95:
+```
 python3 main_suptickets.py --indicate_method granet --update_bn --pre_train --cyclic_train --re_explore --no_maskupdates --cyc_lr --lr_2 0.005 --lr_1 0.001 --cycle 8 --cycle_rate 0.1 --sparse  --decay-schedule constant --seed 41 --sparse-init ERK --update-frequency 1000 --batch-size 128 --prune-rate 0.5 --large-death-rate 0.5 --method GraNet --growth gradient --prune magnitude --init-density 0.5 --final-density 0.05  --epochs 250  --model ResNet50 --data cifar100
-
-### Superpose cheap tickets created by Rigl at sparsity 0.95:
-
-cd CIFAR
-
-ppython3 main_suptickets.py --indicate_method rigl --update_bn --pre_train --cyclic_train --re_explore --no_maskupdates --cyc_lr --lr_2 0.005 --lr_1 0.001 --cycle 8 --cycle_rate 0.1 --sparse  --decay-schedule constant --seed 41 --sparse-init ERK --update-frequency 1000 --batch-size 128 --prune-rate 0.5 --large-death-rate 0.5 --method DST --growth gradient --prune magnitude --init-density 0.05 --final-density 0.05  --epochs 250  --model ResNet50 --data cifar100 
-
-### Superpose cheap tickets created by SET  at sparsity 0.95:
-
-cd CIFAR
-
+```
+#### Superpose cheap tickets created by Rigl at sparsity 0.95:
+```
+python3 main_suptickets.py --indicate_method rigl --update_bn --pre_train --cyclic_train --re_explore --no_maskupdates --cyc_lr --lr_2 0.005 --lr_1 0.001 --cycle 8 --cycle_rate 0.1 --sparse  --decay-schedule constant --seed 41 --sparse-init ERK --update-frequency 1000 --batch-size 128 --prune-rate 0.5 --large-death-rate 0.5 --method DST --growth gradient --prune magnitude --init-density 0.05 --final-density 0.05  --epochs 250  --model ResNet50 --data cifar100 
+```
+#### Superpose cheap tickets created by SET  at sparsity 0.95:
+```
 python3 main_suptickets.py --indicate_method set --update_bn --pre_train --cyclic_train --re_explore --no_maskupdates --cyc_lr --lr_2 0.005 --lr_1 0.001 --cycle 8 --cycle_rate 0.1 --sparse  --decay-schedule constant --seed 41 --sparse-init ERK --update-frequency 1000 --batch-size 128 --prune-rate 0.5 --large-death-rate 0.5 --method DST --growth random --prune magnitude --init-density 0.05 --final-density 0.05  --epochs 250  --model ResNet50 --data cifar100 
-
+```
 
 
 
 ### Imagenet Experiments
-
-### Superpose cheap tickets created by GraNet (s_i = 5) at sparsity 0.90:
+```
 cd ImageNet
-
+```
+#### Superpose cheap tickets created by GraNet (s_i = 5) at sparsity 0.90:
+```
 python $1multiproc.py --nproc_per_node 2 $1main.py --sparse --sparse-init ERK --first_m 30 --second_m 60 --third_m 85 --method DST --init-prune-epoch 0 --final-prune-epoch 30 --init-density 0.5  --final-density 0.1  --multiplier 1 --growth gradient --seed 17 --master_port 7768 -j20 -p 500 --arch resnet50 -c fanin --update-frequency 4000 --label-smoothing 0.1 -b 64 --lr 0.1 --warmup 5 --density 0.1  $2 ../../imagenet2012/ --epochs 100 --indicate_method Rigl --cyclic_epochs 8 --pretrain_epoch 92 --pre_train --cyclic_train --bn_update --lr_2 0.0005 --lr_1 0.0001 --cycle 2 --large-death-rate 0.5 --cyc_lr 
-  
-
-### Superpose cheap tickets created by Rigl at sparsity 0.90:
-cd ImageNet
-
+```  
+#### Superpose cheap tickets created by Rigl at sparsity 0.90:
+```
 python $1multiproc.py --nproc_per_node 2 $1main.py --sparse --sparse-init ERK --first_m 30 --second_m 60 --third_m 85 --method GraNet --init-prune-epoch 0 --final-prune-epoch 30 --init-density 0.1  --final-density 0.1  --multiplier 1 --growth gradient --seed 17 --master_port 7768 -j20 -p 500 --arch resnet50 -c fanin --update-frequency 4000 --label-smoothing 0.1 -b 64 --lr 0.1 --warmup 5 --density 0.1  $2 ../../imagenet2012/ --epochs 100 --indicate_method Granet --cyclic_epochs 8 --pretrain_epoch 92 --pre_train --cyclic_train --bn_update --lr_2 0.0005 --lr_1 0.0001 --cycle 2 --large-death-rate 0.5 --cyc_lr 
-
+```
 
 
 # Citation
