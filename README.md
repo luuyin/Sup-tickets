@@ -1,4 +1,4 @@
-# (UAI2022) Sup-tickets
+# (UAI 2022) Sup-tickets
 
 <div align=center><img src="https://github.com/luuyin/Sup-tickets/blob/main/sup_tickets.png" width="600" height="300"></div>
 
